@@ -1,10 +1,11 @@
 from enum import Enum
 
 
+# в строки сделать
 class JobStatus(Enum):
-    CREATED = 1
-    ASSIGNED = 2
-    IN_PROGRESS = 3
-    COMPLETED = 4
-    CANCELLED = 5
-    ON_HOLD = 6
+    CREATED = "создана"
+    ASSIGNED = "назначена"
+    IN_PROGRESS = "в процессе"
+    COMPLETED = "завершена"
+    CANCELLED = "отменена"
+    ON_HOLD = "приостановлена"

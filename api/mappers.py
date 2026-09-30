@@ -5,7 +5,7 @@ from domain.Job import Job
 def to_domain(req: JobCreateRequest) -> Job:
     return Job(
         title=req.title,
-        assignee=req.assignee,
+        # assignee=req.assignee,
     )
 
 def to_response(job: Job) -> JobResponse:

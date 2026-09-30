@@ -7,7 +7,7 @@ from domain.JobStatus import JobStatus
 
 class JobCreateRequest(BaseModel):
     title: str
-    assignee: str | None
+    # assignee: str | None = None
 
 class JobResponse(BaseModel):
     id: str

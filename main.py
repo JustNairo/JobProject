@@ -1,33 +1,28 @@
-from datetime import datetime
-from pydantic import BaseModel
-
 from fastapi import FastAPI, Depends, HTTPException, Request
 from fastapi.responses import Response, JSONResponse
-
-from api.mappers import to_domain
-from api.schemas import JobCreateRequest
-from domain.Job import Job
+from api.mappers import to_domain, to_response
+from api.schemas import JobCreateRequest, JobResponse
+from domain.Exceptions import JobServiceError
 from domain.JobStatus import JobStatus
-from service.JobService import JobService, JobNotFoundException
+from service.JobService import JobService
 
-# Создаем экземпляр приложения
+
 app = FastAPI()
 
 
-@app.exception_handler(JobNotFoundException)
-def not_found_exception_handler(request: Request, exc: JobNotFoundException):
+@app.exception_handler(JobServiceError)
+def not_found_exception_handler(request: Request, exc: JobServiceError):
     return JSONResponse(
         status_code=exc.http_code,
-        content={"message": f"oops: {exc.msg}"},
+        content={"message": f"Беда: {exc.msg}"},
     )
 
 
 @app.post("/jobs")
 def create_job(
         req: JobCreateRequest,
-        #service: JobService = Depends(), # todo
+        job_service: JobService = Depends()
 ):
-    job_service = JobService()
     new_job = to_domain(req)
     job_service.create_job(new_job)
 
@@ -37,17 +32,65 @@ def create_job(
         "title" : new_job.title,
     }
 
+@app.post("/jobs/{job_id}/status")
+def change_status(
+        job_id: str,
+        status: JobStatus,
+        job_service: JobService = Depends()
+):
+    job_service.change_status(job_id, status)
+
+    return {
+        "message" : "Статус задачи был изменён",
+        "id" : job_id,
+        "status" : status,
+    }
+
+@app.post("/jobs/{job_id}/assign")
+def assign_job(
+        job_id: str,
+        assignee: str,
+        job_service: JobService = Depends(),
+):
+    job_service.assign(job_id, assignee)
+
+    return {
+        "message" : "Работе был назначен исполнитель",
+        "id" : job_id,
+        "assignee" : assignee,
+    }
 
 @app.get("/jobs/{job_id}")
-def get_job(job_id: str):
-    job_service = JobService()
+def get_job(
+        job_id: str,
+        job_service: JobService = Depends()
+):
     job_to_get = job_service.get_job(job_id)
+    job_response: JobResponse = to_response(job_to_get)
 
     return {
         "message" : "Вот ваша задача",
-        "id" : job_to_get.id,
-        "title" : job_to_get.title,
+        "job" : job_response,
     }
+
+@app.get("/jobs/status/{status}")
+def get_jobs(
+        status: JobStatus,
+        job_service: JobService = Depends()
+):
+    job_list = job_service.get_job_list(status)
+
+    response: list[JobResponse] = list()
+    for job in job_list:
+        response.append(to_response(job))
+
+    return {
+        "message" : "Вот ваша задача",
+        "jobs" : response, #todo это так работать не будет
+    }
+
+
+
 
 
 

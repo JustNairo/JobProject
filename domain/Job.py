@@ -6,7 +6,7 @@ from domain.JobStatus import JobStatus
 from domain.JobHistoryEntry import JobHistoryEntry
 from domain.JobStatusTransition import JobStatusTransition
 
-#TODO добавить условия
+#TODO добавить условия?
 @dataclass
 class Job:
     title: str
@@ -18,6 +18,7 @@ class Job:
     history: list[JobHistoryEntry] = field(default_factory=list)
 
 
+'''
     def change_status(self, new_status: JobStatus):
         if not JobStatusTransition.can_make(self.status, new_status):
             #TODO ошибку кинуть
@@ -25,5 +26,5 @@ class Job:
 
         self.history.append(JobHistoryEntry(self.status, new_status, datetime.now()))
         self.status = new_status
-
+'''
 
