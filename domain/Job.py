@@ -4,7 +4,7 @@ from datetime import datetime
 
 from domain.JobStatus import JobStatus
 from domain.JobHistoryEntry import JobHistoryEntry
-from domain.JobStatusTransition import JobStatusTransition
+
 
 #TODO добавить условия?
 @dataclass

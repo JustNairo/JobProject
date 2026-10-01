@@ -1,5 +1,5 @@
 from datetime import datetime
-from sqlalchemy import create_engine, select, update
+from sqlalchemy import create_engine, select
 from sqlalchemy.orm import Session
 from config import DATABASE_URL
 from domain.Job import Job

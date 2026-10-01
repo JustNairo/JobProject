@@ -12,6 +12,8 @@ def get_job_repository() -> JobRepository:
 
 
 class JobService:
+    #    def __init__(self, repository: JobRepository = get_job_repository()):
+    #     self.repository: JobRepository = repository
     repository: JobRepository = get_job_repository()
 
     def check_job_exist(self, job_id: str):

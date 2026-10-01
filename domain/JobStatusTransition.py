@@ -10,5 +10,7 @@ class JobStatusTransition:
     }
 
     @staticmethod
-    def can_make(from_status: JobStatus, to_status: JobStatus):
+    def can_make(from_status: JobStatus, to_status: JobStatus) -> bool:
+        if from_status not in JobStatusTransition.allowed_transactions:
+            return False
         return to_status in JobStatusTransition.allowed_transactions[from_status]
