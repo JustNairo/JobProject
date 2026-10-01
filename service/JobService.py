@@ -19,6 +19,9 @@ class JobService:
             raise JobNotFoundException
 
     def create_job(self, new_job: Job):
+        if new_job.title == "":
+            raise InvalidJobDataError("Название работы не может быть пустым")
+
         self.repository.save(new_job)
 
     def get_job(self, job_id: str) -> Job:
@@ -36,9 +39,11 @@ class JobService:
         now = datetime.now()
         self.repository.update(job_id, assignee=new_assignee, updated_at=now)
 
-    def change_status(self, job_id: str, new_status: JobStatus):
+    def change_status(self, job_id: str, new_status: JobStatus) -> JobStatus:
         self.check_job_exist(job_id)
         job = self.repository.get(job_id)
+
+        old_status = job.status
 
         if not JobStatusTransition.can_make(job.status, new_status):
             raise InvalidStatusTransitionError(job.status, new_status)
@@ -46,6 +51,8 @@ class JobService:
         now = datetime.now()
         self.repository.update(job_id, status=new_status, updated_at=now)
         self.repository.add_status_history(job_id, job.status, new_status, now)
+
+        return old_status
 
     def get_job_list(self, status: JobStatus | None) -> list[Job]:
         all_jobs = self.repository.list_all()

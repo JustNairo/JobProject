@@ -28,9 +28,8 @@ def create_job(
     job_service.create_job(new_job)
 
     return {
-        "message" : "Задача создана",
-        "id" : new_job.id,
-        "title" : new_job.title,
+        "message" : "Работа создана",
+        "job" : new_job,
     }
 
 @app.post("/jobs/{job_id}/status")
@@ -39,12 +38,13 @@ def change_status(
         status: JobStatus,
         job_service: JobService = Depends()
 ):
-    job_service.change_status(job_id, status)
+    old_status = job_service.change_status(job_id, status)
 
     return {
         "message" : "Статус задачи был изменён",
         "id" : job_id,
-        "status" : status,
+        "old status": old_status,
+        "new status" : status,
     }
 
 @app.post("/jobs/{job_id}/assign")
@@ -56,9 +56,9 @@ def assign_job(
     job_service.assign(job_id, assignee)
 
     return {
-        "message" : "Работе был назначен исполнитель",
+        "message" : "Исполнитель был изменён",
         "id" : job_id,
-        "assignee" : assignee,
+        "new assignee" : assignee,
     }
 
 @app.get("/jobs/{job_id}")
@@ -70,7 +70,7 @@ def get_job(
     job_response: JobResponse = to_response(job_to_get)
 
     return {
-        "message" : "Вот ваша задача",
+        "message" : "Найденная работа",
         "job" : job_response,
     }
 
@@ -95,7 +95,7 @@ def get_jobs_response(job_list: list[Job]):
         response.append(to_response(job))
 
     return {
-        "message" : "Вот ваши задачи",
+        "message" : "Найденные работы",
         "jobs" : response,
     }
 
