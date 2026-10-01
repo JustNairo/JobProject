@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
+from datetime import datetime
 
 from domain.Job import Job
+from domain.JobStatus import JobStatus
 
 
 class JobRepository(ABC):
@@ -22,4 +24,8 @@ class JobRepository(ABC):
 
     @abstractmethod
     def update(self, job_id, **fields):
+        pass
+
+    @abstractmethod
+    def add_status_history(self, job_id: str, from_status: JobStatus, to_status: JobStatus, changed_at: datetime):
         pass

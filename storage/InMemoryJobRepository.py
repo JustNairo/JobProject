@@ -1,4 +1,8 @@
+from datetime import datetime
+
 from domain.Job import Job
+from domain.JobHistoryEntry import JobHistoryEntry
+from domain.JobStatus import JobStatus
 from storage.JobRepository import JobRepository
 
 
@@ -17,7 +21,6 @@ class InMemoryJobRepository(JobRepository):
     def save(self, job):
         self.job_list.append(job)
 
-
     def is_job_exist(self, job_id) -> bool:
         return any(job.id == job_id for job in self.job_list)
 
@@ -32,3 +35,8 @@ class InMemoryJobRepository(JobRepository):
 
         return job
 
+    def add_status_history(self, job_id: str, from_status: JobStatus, to_status: JobStatus, changed_at: datetime):
+        job = self.get(job_id)
+        job.history.append(
+            JobHistoryEntry(from_status, to_status, changed_at)
+        )

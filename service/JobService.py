@@ -45,9 +45,11 @@ class JobService:
 
         now = datetime.now()
         self.repository.update(job_id, status=new_status, updated_at=now)
+        self.repository.add_status_history(job_id, job.status, new_status, now)
 
-    def get_job_list(self, status=None) -> list[Job]:
+    def get_job_list(self, status: JobStatus | None) -> list[Job]:
         all_jobs = self.repository.list_all()
-        if status:
+
+        if status is not None:
             return [job for job in all_jobs if job.status == status]
         return all_jobs

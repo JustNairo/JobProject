@@ -1,8 +1,9 @@
-from fastapi import FastAPI, Depends, HTTPException, Request
+from fastapi import FastAPI, Depends, HTTPException, Request, Query
 from fastapi.responses import Response, JSONResponse
 from api.mappers import to_domain, to_response
 from api.schemas import JobCreateRequest, JobResponse
 from domain.Exceptions import JobServiceError
+from domain.Job import Job
 from domain.JobStatus import JobStatus
 from service.JobService import JobService
 
@@ -79,18 +80,24 @@ def get_jobs(
         job_service: JobService = Depends()
 ):
     job_list = job_service.get_job_list(status)
+    return get_jobs_response(job_list)
 
+@app.get("/jobs/")
+def get_all_jobs(
+        job_service: JobService = Depends()
+):
+    job_list = job_service.get_job_list(None)
+    return get_jobs_response(job_list)
+
+def get_jobs_response(job_list: list[Job]):
     response: list[JobResponse] = list()
     for job in job_list:
         response.append(to_response(job))
 
     return {
-        "message" : "Вот ваша задача",
+        "message" : "Вот ваши задачи",
         "jobs" : response,
     }
-
-
-
 
 
 
