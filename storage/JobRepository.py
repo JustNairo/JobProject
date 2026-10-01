@@ -9,13 +9,17 @@ class JobRepository(ABC):
         pass
 
     @abstractmethod
-    def get(self, job_id: str):
+    def get(self, job_id: str) -> Job:
         pass
 
     @abstractmethod
-    def list_all(self):
+    def list_all(self) -> list[Job]:
         pass
 
     @abstractmethod
-    def is_job_exist(self, job_id) -> bool:
+    def is_job_exist(self, job_id: str) -> bool:
+        pass
+
+    @abstractmethod
+    def update(self, job_id, **fields):
         pass

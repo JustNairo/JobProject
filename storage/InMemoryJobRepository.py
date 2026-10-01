@@ -17,6 +17,18 @@ class InMemoryJobRepository(JobRepository):
     def save(self, job):
         self.job_list.append(job)
 
+
     def is_job_exist(self, job_id) -> bool:
         return any(job.id == job_id for job in self.job_list)
+
+    def update(self, job_id: str, **fields) -> Job | None:
+        job = self.get(job_id)
+        if job is None:
+            return None
+
+        for key, value in fields.items():
+            if hasattr(job, key):
+                setattr(job, key, value)
+
+        return job
 

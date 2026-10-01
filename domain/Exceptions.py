@@ -16,5 +16,6 @@ class InvalidStatusTransitionError(JobServiceError):
     http_code:int = 409
 
 class InvalidJobDataError(JobServiceError):
-    msg: str = "Ошибка в данных"
+    def __init__(self, cause: str):
+        self.msg: str = f"Ошибка в данных: {cause}"
     http_code:int = 422

@@ -2,6 +2,7 @@ from datetime import datetime
 
 from pydantic import BaseModel
 
+from domain.JobHistoryEntry import JobHistoryEntry
 from domain.JobStatus import JobStatus
 
 
@@ -16,3 +17,4 @@ class JobResponse(BaseModel):
     status: JobStatus
     created_at: datetime
     updated_at: datetime
+    history: list[JobHistoryEntry]

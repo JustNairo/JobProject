@@ -16,4 +16,5 @@ def to_response(job: Job) -> JobResponse:
         status=job.status,
         created_at=job.created_at,
         updated_at=job.updated_at,
+        history=job.history,
     )

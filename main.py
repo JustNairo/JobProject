@@ -86,7 +86,7 @@ def get_jobs(
 
     return {
         "message" : "Вот ваша задача",
-        "jobs" : response, #todo это так работать не будет
+        "jobs" : response,
     }
 
 
