@@ -6,9 +6,16 @@ from app.domain.Exceptions import JobServiceError
 from app.domain.Job import Job
 from app.domain.JobStatus import JobStatus
 from app.service.JobService import JobService
-
+from app.storage.JobRepository import JobRepository
+from app.storage.SqlAlchemyJobRepository import SqlAlchemyJobRepository
 
 app = FastAPI()
+
+def get_job_repository() -> JobRepository:
+    return SqlAlchemyJobRepository()
+
+def get_job_service() -> JobService:
+    return JobService(get_job_repository())
 
 
 @app.exception_handler(JobServiceError)
@@ -22,7 +29,7 @@ def not_found_exception_handler(request: Request, exc: JobServiceError):
 @app.post("/jobs")
 def create_job(
         req: JobCreateRequest,
-        job_service: JobService = Depends()
+        job_service: JobService = Depends(get_job_service)
 ):
     new_job = to_domain(req)
     job_service.create_job(new_job)
@@ -37,7 +44,7 @@ def create_job(
 def change_status(
         job_id: str,
         status: JobStatus,
-        job_service: JobService = Depends()
+        job_service: JobService = Depends(get_job_service)
 ):
     old_status = job_service.change_status(job_id, status)
 
@@ -52,7 +59,7 @@ def change_status(
 def assign_job(
         job_id: str,
         assignee: str,
-        job_service: JobService = Depends(),
+        job_service: JobService = Depends(get_job_service),
 ):
     job_service.assign(job_id, assignee)
 
@@ -65,7 +72,7 @@ def assign_job(
 @app.get("/jobs/{job_id}")
 def get_job(
         job_id: str,
-        job_service: JobService = Depends()
+        job_service: JobService = Depends(get_job_service)
 ):
     job_to_get = job_service.get_job(job_id)
     job_response: JobResponse = to_response(job_to_get)
@@ -78,14 +85,14 @@ def get_job(
 @app.get("/jobs/status/{status}")
 def get_jobs(
         status: JobStatus,
-        job_service: JobService = Depends()
+        job_service: JobService = Depends(get_job_service)
 ):
     job_list = job_service.get_job_list(status)
     return get_jobs_response(job_list)
 
 @app.get("/jobs/")
 def get_all_jobs(
-        job_service: JobService = Depends()
+        job_service: JobService = Depends(get_job_service)
 ):
     job_list = job_service.get_job_list(None)
     return get_jobs_response(job_list)

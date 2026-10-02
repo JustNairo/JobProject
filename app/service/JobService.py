@@ -8,14 +8,11 @@ from app.storage.JobRepository import JobRepository
 from app.storage.SqlAlchemyJobRepository import SqlAlchemyJobRepository
 
 
-def get_job_repository() -> JobRepository:
-    return SqlAlchemyJobRepository()
-
 
 class JobService:
-    #    def __init__(self, repository: JobRepository = get_job_repository()):
-    #     self.repository: JobRepository = repository
-    repository: JobRepository = get_job_repository()
+    def __init__(self, repository: JobRepository):
+        self.repository: JobRepository = repository
+    # repository: JobRepository = get_job_repository()
 
     def check_job_exist(self, job_id: str):
         if not self.repository.is_job_exist(job_id):
