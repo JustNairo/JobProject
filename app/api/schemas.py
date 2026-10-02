@@ -2,8 +2,8 @@ from datetime import datetime
 
 from pydantic import BaseModel
 
-from domain.JobHistoryEntry import JobHistoryEntry
-from domain.JobStatus import JobStatus
+from app.domain.JobHistoryEntry import JobHistoryEntry
+from app.domain.JobStatus import JobStatus
 
 
 class JobCreateRequest(BaseModel):

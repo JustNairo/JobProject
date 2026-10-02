@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from datetime import datetime
-from domain.JobStatus import JobStatus
+from app.domain.JobStatus import JobStatus
 
 
 @dataclass

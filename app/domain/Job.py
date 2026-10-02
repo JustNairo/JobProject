@@ -2,8 +2,8 @@ import uuid
 from dataclasses import dataclass, field
 from datetime import datetime
 
-from domain.JobStatus import JobStatus
-from domain.JobHistoryEntry import JobHistoryEntry
+from app.domain.JobStatus import JobStatus
+from app.domain.JobHistoryEntry import JobHistoryEntry
 
 
 #TODO добавить условия?

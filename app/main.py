@@ -1,11 +1,11 @@
 from fastapi import FastAPI, Depends, HTTPException, Request, Query
 from fastapi.responses import Response, JSONResponse
-from api.mappers import to_domain, to_response
-from api.schemas import JobCreateRequest, JobResponse
-from domain.Exceptions import JobServiceError
-from domain.Job import Job
-from domain.JobStatus import JobStatus
-from service.JobService import JobService
+from app.api.mappers import to_domain, to_response
+from app.api.schemas import JobCreateRequest, JobResponse
+from app.domain.Exceptions import JobServiceError
+from app.domain.Job import Job
+from app.domain.JobStatus import JobStatus
+from app.service.JobService import JobService
 
 
 app = FastAPI()
@@ -26,10 +26,11 @@ def create_job(
 ):
     new_job = to_domain(req)
     job_service.create_job(new_job)
+    response: JobResponse = to_response(new_job)
 
     return {
         "message" : "Работа создана",
-        "job" : new_job,
+        "job" : response,
     }
 
 @app.post("/jobs/{job_id}/status")

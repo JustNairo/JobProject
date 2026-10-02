@@ -1,10 +1,11 @@
 from datetime import datetime
-from domain.Exceptions import JobNotFoundException, InvalidStatusTransitionError, InvalidJobDataError
-from domain.Job import Job
-from domain.JobStatus import JobStatus
-from domain.JobStatusTransition import JobStatusTransition
-from storage.JobRepository import JobRepository
-from storage.SqlAlchemyJobRepository import SqlAlchemyJobRepository
+from app.domain.Exceptions import JobNotFoundException, InvalidStatusTransitionError, InvalidJobDataError
+from app.domain.Job import Job
+from app.domain.JobStatus import JobStatus
+from app.domain.JobStatusTransition import JobStatusTransition
+from app.storage.InMemoryJobRepository import InMemoryJobRepository
+from app.storage.JobRepository import JobRepository
+from app.storage.SqlAlchemyJobRepository import SqlAlchemyJobRepository
 
 
 def get_job_repository() -> JobRepository:

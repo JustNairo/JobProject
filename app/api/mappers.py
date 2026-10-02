@@ -1,5 +1,5 @@
-from api.schemas import JobCreateRequest, JobResponse
-from domain.Job import Job
+from app.api.schemas import JobCreateRequest, JobResponse
+from app.domain.Job import Job
 
 
 def to_domain(req: JobCreateRequest) -> Job:

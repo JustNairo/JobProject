@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
 from datetime import datetime
 
-from domain.Job import Job
-from domain.JobStatus import JobStatus
+from app.domain.Job import Job
+from app.domain.JobStatus import JobStatus
 
 
 class JobRepository(ABC):

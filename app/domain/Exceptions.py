@@ -1,4 +1,4 @@
-from domain.JobStatus import JobStatus
+from app.domain.JobStatus import JobStatus
 
 
 class JobServiceError(Exception):
