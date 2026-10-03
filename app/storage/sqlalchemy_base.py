@@ -3,7 +3,7 @@ from datetime import datetime
 from sqlalchemy import String, Enum, ForeignKey
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
-from app.domain.JobStatus import JobStatus
+from app.domain.job_status import JobStatus
 
 
 class Base(DeclarativeBase):

@@ -1,9 +1,9 @@
 from datetime import datetime
 
-from app.domain.Job import Job
-from app.domain.JobHistoryEntry import JobHistoryEntry
-from app.domain.JobStatus import JobStatus
-from app.storage.JobRepository import JobRepository
+from app.domain.job import Job
+from app.domain.job_history_entry import JobHistoryEntry
+from app.domain.job_status import JobStatus
+from app.storage.job_repository import JobRepository
 
 
 class InMemoryJobRepository(JobRepository):

@@ -1,6 +1,6 @@
-from app.domain.Job import Job
-from app.domain.JobHistoryEntry import JobHistoryEntry
-from app.storage.SqlAlchemyBase import JobBase, JobHistoryEntryBase
+from app.domain.job import Job
+from app.domain.job_history_entry import JobHistoryEntry
+from app.storage.sqlalchemy_base import JobBase, JobHistoryEntryBase
 
 
 def job_base_to_domain(job_base: JobBase) -> Job:

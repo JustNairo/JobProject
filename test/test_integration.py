@@ -2,10 +2,10 @@ import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from app.domain.Job import Job
-from app.service.JobService import JobService
-from app.storage.SqlAlchemyBase import Base
-from app.storage.SqlAlchemyJobRepository import SqlAlchemyJobRepository
+from app.domain.job import Job
+from app.service.job_service import JobService
+from app.storage.sqlalchemy_base import Base
+from app.storage.sqlalchemy_job_repository import SqlAlchemyJobRepository
 
 
 # очень глупенько сделано :(

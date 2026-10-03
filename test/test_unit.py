@@ -1,10 +1,10 @@
 import pytest
 
-from app.domain.Exceptions import InvalidStatusTransitionError, InvalidJobDataError, JobNotFoundException
-from app.domain.Job import Job
-from app.domain.JobStatus import JobStatus
-from app.service.JobService import JobService
-from app.storage.InMemoryJobRepository import InMemoryJobRepository
+from app.domain.exceptions import InvalidStatusTransitionError, InvalidJobDataError, JobNotFoundException
+from app.domain.job import Job
+from app.domain.job_status import JobStatus
+from app.service.job_service import JobService
+from app.storage.in_memory_job_repository import InMemoryJobRepository
 
 
 # не самый лучший код, конечно

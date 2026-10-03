@@ -2,12 +2,12 @@ from datetime import datetime
 from sqlalchemy import create_engine, select
 from sqlalchemy.orm import Session
 from app.config import DATABASE_URL
-from app.domain.Job import Job
-from app.domain.JobHistoryEntry import JobHistoryEntry
-from app.domain.JobStatus import JobStatus
-from app.storage.JobRepository import JobRepository
-from app.storage.Mappers import job_base_to_domain, job_to_base, history_to_base
-from app.storage.SqlAlchemyBase import Base, JobBase
+from app.domain.job import Job
+from app.domain.job_history_entry import JobHistoryEntry
+from app.domain.job_status import JobStatus
+from app.storage.job_repository import JobRepository
+from app.storage.mappers import job_base_to_domain, job_to_base, history_to_base
+from app.storage.sqlalchemy_base import Base, JobBase
 
 
 class SqlAlchemyJobRepository(JobRepository):

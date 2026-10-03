@@ -1,4 +1,4 @@
-from app.domain.JobStatus import JobStatus
+from app.domain.job_status import JobStatus
 
 
 class JobStatusTransition:

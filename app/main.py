@@ -2,12 +2,12 @@ from fastapi import FastAPI, Depends, HTTPException, Request, Query
 from fastapi.responses import Response, JSONResponse
 from app.api.mappers import to_domain, to_response
 from app.api.schemas import JobCreateRequest, JobResponse
-from app.domain.Exceptions import JobServiceError
-from app.domain.Job import Job
-from app.domain.JobStatus import JobStatus
-from app.service.JobService import JobService
-from app.storage.JobRepository import JobRepository
-from app.storage.SqlAlchemyJobRepository import SqlAlchemyJobRepository
+from app.domain.exceptions import JobServiceError
+from app.domain.job import Job
+from app.domain.job_status import JobStatus
+from app.service.job_service import JobService
+from app.storage.job_repository import JobRepository
+from app.storage.sqlalchemy_job_repository import SqlAlchemyJobRepository
 
 app = FastAPI()
 

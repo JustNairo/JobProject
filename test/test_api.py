@@ -3,13 +3,13 @@ from starlette.testclient import TestClient
 
 from app.api.mappers import to_domain
 from app.api.schemas import JobCreateRequest
-from app.domain.Exceptions import JobNotFoundException
-from app.domain.Job import Job
-from app.domain.JobStatus import JobStatus
+from app.domain.exceptions import JobNotFoundException
+from app.domain.job import Job
+from app.domain.job_status import JobStatus
 from app.main import app, get_job_service, get_job_repository
-from app.service.JobService import JobService
-from app.storage.InMemoryJobRepository import InMemoryJobRepository
-from app.storage.JobRepository import JobRepository
+from app.service.job_service import JobService
+from app.storage.in_memory_job_repository import InMemoryJobRepository
+from app.storage.job_repository import JobRepository
 
 
 def test_create_job():
