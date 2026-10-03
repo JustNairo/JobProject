@@ -3,15 +3,13 @@ from app.domain.exceptions import JobNotFoundException, InvalidStatusTransitionE
 from app.domain.job import Job
 from app.domain.job_status import JobStatus
 from app.domain.job_status_transition import JobStatusTransition
-from app.storage.in_memory_job_repository import InMemoryJobRepository
 from app.storage.job_repository import JobRepository
-from app.storage.sqlalchemy_job_repository import SqlAlchemyJobRepository
-
 
 
 class JobService:
     def __init__(self, repository: JobRepository):
         self.repository: JobRepository = repository
+
     # repository: JobRepository = get_job_repository()
 
     def check_job_exist(self, job_id: str):

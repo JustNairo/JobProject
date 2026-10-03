@@ -1,6 +1,5 @@
 from abc import ABC, abstractmethod
 from datetime import datetime
-
 from app.domain.job import Job
 from app.domain.job_status import JobStatus
 

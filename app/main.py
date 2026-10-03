@@ -1,5 +1,5 @@
-from fastapi import FastAPI, Depends, HTTPException, Request, Query
-from fastapi.responses import Response, JSONResponse
+from fastapi import FastAPI, Depends, Request
+from fastapi.responses import JSONResponse
 from app.api.mappers import to_domain, to_response
 from app.api.schemas import JobCreateRequest, JobResponse
 from app.domain.exceptions import JobServiceError
@@ -11,8 +11,10 @@ from app.storage.sqlalchemy_job_repository import SqlAlchemyJobRepository
 
 app = FastAPI()
 
+
 def get_job_repository() -> JobRepository:
     return SqlAlchemyJobRepository()
+
 
 def get_job_service() -> JobService:
     return JobService(get_job_repository())
@@ -36,9 +38,10 @@ def create_job(
     response: JobResponse = to_response(new_job)
 
     return {
-        "message" : "Работа создана",
-        "job" : response,
+        "message": "Работа создана",
+        "job": response,
     }
+
 
 @app.post("/jobs/{job_id}/status")
 def change_status(
@@ -49,11 +52,12 @@ def change_status(
     old_status = job_service.change_status(job_id, status)
 
     return {
-        "message" : "Статус задачи был изменён",
-        "id" : job_id,
+        "message": "Статус задачи был изменён",
+        "id": job_id,
         "old status": old_status,
-        "new status" : status,
+        "new status": status,
     }
+
 
 @app.post("/jobs/{job_id}/assign")
 def assign_job(
@@ -64,10 +68,11 @@ def assign_job(
     job_service.assign(job_id, assignee)
 
     return {
-        "message" : "Исполнитель был изменён",
-        "id" : job_id,
-        "new assignee" : assignee,
+        "message": "Исполнитель был изменён",
+        "id": job_id,
+        "new assignee": assignee,
     }
+
 
 @app.get("/jobs/{job_id}")
 def get_job(
@@ -78,9 +83,10 @@ def get_job(
     job_response: JobResponse = to_response(job_to_get)
 
     return {
-        "message" : "Найденная работа",
-        "job" : job_response,
+        "message": "Найденная работа",
+        "job": job_response,
     }
+
 
 @app.get("/jobs/status/{status}")
 def get_jobs(
@@ -90,6 +96,7 @@ def get_jobs(
     job_list = job_service.get_job_list(status)
     return get_jobs_response(job_list)
 
+
 @app.get("/jobs/")
 def get_all_jobs(
         job_service: JobService = Depends(get_job_service)
@@ -97,17 +104,13 @@ def get_all_jobs(
     job_list = job_service.get_job_list(None)
     return get_jobs_response(job_list)
 
+
 def get_jobs_response(job_list: list[Job]):
     response: list[JobResponse] = list()
     for job in job_list:
         response.append(to_response(job))
 
     return {
-        "message" : "Найденные работы",
-        "jobs" : response,
+        "message": "Найденные работы",
+        "jobs": response,
     }
-
-
-
-
-

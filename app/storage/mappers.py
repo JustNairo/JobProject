@@ -14,6 +14,7 @@ def job_base_to_domain(job_base: JobBase) -> Job:
         history=[history_base_to_domain(history_base) for history_base in job_base.history],
     )
 
+
 def job_to_base(job: Job) -> JobBase:
     return JobBase(
         id=job.id,
@@ -25,12 +26,14 @@ def job_to_base(job: Job) -> JobBase:
         history=[history_to_base(history) for history in job.history],
     )
 
+
 def history_base_to_domain(history_base: JobHistoryEntryBase) -> JobHistoryEntry:
     return JobHistoryEntry(
         from_status=history_base.from_status,
         to_status=history_base.to_status,
         changed_at=history_base.changed_at,
     )
+
 
 def history_to_base(history: JobHistoryEntry) -> JobHistoryEntryBase:
     return JobHistoryEntryBase(

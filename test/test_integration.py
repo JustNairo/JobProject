@@ -1,7 +1,6 @@
 import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-
 from app.domain.job import Job
 from app.service.job_service import JobService
 from app.storage.sqlalchemy_base import Base

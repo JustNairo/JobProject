@@ -1,12 +1,10 @@
 import uuid
 from dataclasses import dataclass, field
 from datetime import datetime
-
 from app.domain.job_status import JobStatus
 from app.domain.job_history_entry import JobHistoryEntry
 
 
-#TODO добавить условия?
 @dataclass
 class Job:
     title: str
@@ -16,15 +14,3 @@ class Job:
     created_at: datetime = field(default_factory=datetime.now)
     updated_at: datetime = field(default_factory=datetime.now)
     history: list[JobHistoryEntry] = field(default_factory=list)
-
-
-'''
-    def change_status(self, new_status: JobStatus):
-        if not JobStatusTransition.can_make(self.status, new_status):
-            #TODO ошибку кинуть
-            pass
-
-        self.history.append(JobHistoryEntry(self.status, new_status, datetime.now()))
-        self.status = new_status
-'''
-

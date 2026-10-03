@@ -1,5 +1,4 @@
 from datetime import datetime
-
 from app.domain.job import Job
 from app.domain.job_history_entry import JobHistoryEntry
 from app.domain.job_status import JobStatus

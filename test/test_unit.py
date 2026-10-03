@@ -1,5 +1,4 @@
 import pytest
-
 from app.domain.exceptions import InvalidStatusTransitionError, InvalidJobDataError, JobNotFoundException
 from app.domain.job import Job
 from app.domain.job_status import JobStatus

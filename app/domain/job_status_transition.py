@@ -3,10 +3,10 @@ from app.domain.job_status import JobStatus
 
 class JobStatusTransition:
     allowed_transactions = {
-        JobStatus.CREATED : { JobStatus.ASSIGNED, JobStatus.CANCELLED },
-        JobStatus.ASSIGNED: { JobStatus.IN_PROGRESS, JobStatus.CANCELLED },
-        JobStatus.IN_PROGRESS: {JobStatus.COMPLETED, JobStatus.CANCELLED, JobStatus.ON_HOLD },
-        JobStatus.ON_HOLD: { JobStatus.IN_PROGRESS },
+        JobStatus.CREATED: {JobStatus.ASSIGNED, JobStatus.CANCELLED},
+        JobStatus.ASSIGNED: {JobStatus.IN_PROGRESS, JobStatus.CANCELLED},
+        JobStatus.IN_PROGRESS: {JobStatus.COMPLETED, JobStatus.CANCELLED, JobStatus.ON_HOLD},
+        JobStatus.ON_HOLD: {JobStatus.IN_PROGRESS},
     }
 
     @staticmethod

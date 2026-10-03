@@ -1,7 +1,6 @@
 from enum import Enum
 
 
-# в строки сделать
 class JobStatus(Enum):
     CREATED = "создана"
     ASSIGNED = "назначена"

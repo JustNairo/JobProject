@@ -1,7 +1,5 @@
 from datetime import datetime
-
 from pydantic import BaseModel
-
 from app.domain.job_history_entry import JobHistoryEntry
 from app.domain.job_status import JobStatus
 
@@ -9,6 +7,7 @@ from app.domain.job_status import JobStatus
 class JobCreateRequest(BaseModel):
     title: str
     # assignee: str | None = None
+
 
 class JobResponse(BaseModel):
     id: str

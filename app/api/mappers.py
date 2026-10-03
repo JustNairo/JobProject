@@ -8,6 +8,7 @@ def to_domain(req: JobCreateRequest) -> Job:
         # assignee=req.assignee,
     )
 
+
 def to_response(job: Job) -> JobResponse:
     return JobResponse(
         id=job.id,
