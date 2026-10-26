@@ -114,3 +114,7 @@ def get_jobs_response(job_list: list[Job]):
         "message": "Найденные работы",
         "jobs": response,
     }
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("app.main:app", reload=True)
